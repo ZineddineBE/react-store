@@ -1,0 +1,131 @@
+body{
+    margin: 0;
+    background-color: #e6e7eb;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: #1e2a3a;
+    padding: 0 10px;
+
+}
+
+header h2{
+    color: white;
+    font-weight: bold;
+}
+
+header a{
+    text-decoration: none;
+    color: white;
+}
+
+header form{
+    display: flex;
+    height: 40px;
+    margin: auto 0;
+}
+
+header form input{
+    background-color: #364153;
+    width: 800px;
+    border-radius: 10px;
+    border-color: white;
+    color: white;
+    padding: 5px;
+    font-size: 1.1rem;
+}
+
+button{
+    background-color: oklch(62.3% .214 259.815);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.basket{
+    background-color: #1e2a3a;
+    height: 50%;
+    margin: auto 0;
+    background-color: #1e2a3a;
+    border: none;
+}
+
+.basket a{
+    padding: 10px 20px;
+}
+
+.basket a:hover{
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.172);
+}
+
+main {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.articles{
+    
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.article {
+    margin-bottom: 25px;
+    width: 350px;
+}
+
+.article a{
+    text-decoration: none;
+}
+
+.description-article{
+    display: flex;
+    justify-content: space-between;
+}
+
+.description-article img{
+    margin-right: 20px;
+    border-radius: 10px;
+}
+
+.description-article p{
+    line-height: 1.5rem;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.description-article button{
+    margin-left: 90%;
+    padding: 10px;
+}
+
+.buttons-pagination{
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+
+.buttons-pagination button{
+    padding: 10px;
+    
+}
+
+.disabled-button{
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.detail-pagination{
+    font-size: .85rem;
+    color: #364153;
+}

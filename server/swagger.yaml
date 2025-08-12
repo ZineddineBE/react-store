@@ -1,0 +1,201 @@
+openapi: 3.1.1
+info:
+  title: Store react
+  description: |-
+    Ce projet est le projet noté pour ce cours de React.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: articles
+paths:
+  /articles:
+    get:
+      tags:
+        - articles
+      summary: Récupérer la liste des articles
+      description: Récupérer la liste des articles
+      operationId: getArticles
+      parameters:
+        - name: page
+          in: query
+          description: Numéro de la page à récupérer
+          required: false
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          description: Nombre d'articles par page
+          required: false
+          schema:
+            type: integer
+        - name: sort
+          in: query
+          description: Champ de tri
+          required: false
+          schema:
+              type: string
+              enum:
+                - id
+                - title
+                - price
+                - createdAt
+        - name: sortDirection
+          in: query
+          description: Ordre de tri
+          required: false
+          schema:
+              type: string
+              enum:
+                - asc
+                - desc
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /articles/{articleId}:
+    get:
+      tags:
+        - articles
+      summary: Récupérer un article
+      description: Récupérer un article
+      operationId: getArticleById
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          description: ID de l'article à récupérer
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+        "404":
+          description: Article not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /articles/search:
+    get:
+      tags:
+        - articles
+      summary: Rechercher des articles
+      description: Rechercher des articles
+      operationId: searchArticles
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: Terme de recherche
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Numéro de la page à récupérer
+          required: false
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          description: Nombre d'articles par page
+          required: false
+          schema:
+            type: integer
+        - name: sort
+          in: query
+          description: Champ de tri
+          required: false
+          schema:
+            type: string
+            enum:
+              - id
+              - title
+              - price
+              - createdAt
+        - name: sortDirection
+          in: query
+          description: Ordre de tri
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    Article:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        imageUrl:
+          type: string
+          example: https://fastly.picsum.photos/id/134/500/500.jpg?hmac=B9KyHkmMllXNwIDo64ywJL9MAt8E-paC3WhMGHTfcy4
+        title:
+          type: string
+          example: Article 1
+        price:
+          type: number
+          format: float
+          example: 19.99
+        description:
+          type: string
+          example: |-
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    ApiResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Article"
+        pagination:
+          type: object
+          properties:
+            total:
+              type: integer
+              example: 100
+            page:
+              type: integer
+              example: 1
+            pageSize:
+              type: integer
+              example: 12
+            totalPages:
+              type: integer
+              example: 24
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Internal server error
